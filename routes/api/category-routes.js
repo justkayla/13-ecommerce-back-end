@@ -9,7 +9,7 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const resp = await Category.findAll({
-      include: [{ model: Product }] // Is this correct syntax?
+      include: [{ model: Product }]
     });
     res.status(200).json(resp);
   } catch (err) {
@@ -21,15 +21,21 @@ router.get('/', async (req, res) => {
 // be sure to include its associated Products
 router.get('/:id', async (req, res) => {
   try {
+    // Assign selected category to resp
     const resp = await Category.findByPk(req.params.id, {
       include: [{ model: Product }]
     });
+    // If no response with specified id
     if (!resp) {
+      // Return `no id` message
       res.status(404).json({ message: 'No category with this id!' });
       return;
     }
+    // Success! Return JSON-ified response
     res.status(200).json(resp);
+    // Catch any errors
   } catch (err) {
+    // Return JSON-ified error message
     res.status(500).json(err.message);
   }
 });
