@@ -44,14 +44,7 @@ https://github.com/justkayla/13-ecommerce-back-end
 
 ## Link to screencast
 
- 
-
-
-## Screenshot
-
-Below is an in-process screenshot of my Employee Tracker.
-
-
+https://app.castify.com/watch/2a2b5dc9-9406-41fb-9b00-a5e22fb5da87
 
 
 ## Contributor
