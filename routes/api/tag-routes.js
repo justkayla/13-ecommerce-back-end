@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     res.status(200).json(resp);
   } catch (err) {
     res.status(500).json(err.message);
-  }  
+  }
 });
 
 // find a single tag by its `id`
@@ -36,17 +36,51 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     // Return JSON-ified error message
     res.status(500).json(err.message);
-  }  
+  }
 });
 
 // create a new tag
-router.post('/', (req, res) => {
-  
+router.post('/', async (req, res) => {
+  /* req.body
+    {
+      tag_name: "purple"  
+    }
+  */
+  try {
+    const resp = await Tag.create(
+      {
+        tag_name: req.body.tag_name,
+      }
+    );
+    res.status(200).json(resp);
+  } catch (err) {
+    res.status(400).json(err.message);
+  }
 });
 
 // update a tag's name by its `id` value
-router.put('/:id', (req, res) => {
-  
+router.put('/:id', async (req, res) => {
+  try {
+    const resp = await Tag.update(
+      {
+        // All the fields you can update and the data attached to the request body.
+        tag_name: req.body.tag_name,
+      },
+      {
+        // Gets a tag based on the tag_id given in the request parameters
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    if (!resp) {
+      res.status(404).json({ message: 'No tag with this id!' });
+      return;
+    }
+    res.status(200).json(resp);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
 });
 
 // delete on tag by its `id` value
@@ -64,7 +98,7 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json(resp);
   } catch (err) {
     res.status(500).json(err.message);
-  }  
+  }
 });
 
 module.exports = router;
