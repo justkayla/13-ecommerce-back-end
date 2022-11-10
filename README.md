@@ -49,4 +49,4 @@ https://app.castify.com/watch/2a2b5dc9-9406-41fb-9b00-a5e22fb5da87
 
 ## Contributor
 
-Kayla Justice &copy;2022   
+Kayla Justice 2022   
